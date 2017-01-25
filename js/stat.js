@@ -22,7 +22,10 @@ var writeText = function (ctx, text, x, y) {
 };
 
 var setColor = function (n1, n2) {
-  return ((Math.random() * n1) * n2).toFixed(0);
+  var a = (Math.random()).toFixed(1);
+  var b = ((Math.random() * n1) * n2).toFixed(0);
+
+  return ('rgba(0, 0, ' + b + ', ' + a + ')');
 };
 
 window.renderStatistics = function (ctx, names, times) {
@@ -60,9 +63,7 @@ window.renderStatistics = function (ctx, names, times) {
     if (name === 'Вы') {
       ctx.fillStyle = 'rgba(255, 0, 0, 1)';
     } else {
-      var b = setColor(5, 50);
-      var a = (Math.random()).toFixed(1);
-      ctx.fillStyle = 'rgba(0, 0, ' + b + ' , ' + a + ')';
+      ctx.fillStyle = setColor(5, 50);
     }
     ctx.fillRect(HISTO_X + (HISTO_WIDTH + COLUMN_INDENT) * i, 100 + HISTO_HEIGHT - height, HISTO_WIDTH, height);
 
