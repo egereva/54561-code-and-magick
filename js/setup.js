@@ -45,29 +45,6 @@ var FIREBALL_COLORS = [
   '#e6e848'
 ];
 
-// случайный цвет
-
-/*
-var setColors = function (arrColors) {
-  return arrColors[Math.floor(Math.random() * arrColors.length)];  //  а как тут правильно сделать перебор цветов по порядку?
-};
-
-
-wizardCoat.addEventListener('click', function () {
-  wizardCoat.style.fill = setColors(WIZARD_COAT_COLORS);
-});
-
-wizardEyes.addEventListener('click', function () {
-  wizardEyes.style.fill = setColors(WIZARD_EYES_COLORS);
-});
-
-setupFireball.addEventListener('click', function () {
-  setupFireball.style.backgroundColor = setColors(FIREBALL_COLORS);
-});
-*/
-
-// цвета по порядку
-
 var i = 0;
 
 wizardCoat.addEventListener('click', function () {
@@ -97,6 +74,3 @@ setupFireball.addEventListener('click', function () {
   }
   setupFireball.style.backgroundColor = FIREBALL_COLORS[k];
 });
-
-// честно говоря, казалось бы такое простое задание, но я всю голову поломала над ним. помог метод проб и ошибок. какой будет наиболее удачный и универсальный вариант для таких случаев? :)
-// и еще вопрос: я пробовала использовать одну переменную i для всех случаев. И при выбранном черном цвете для пальто (последний цвет в массиве), все остальные части  переставали переключаться. При этом, когда был выбран другой цвет - всё работало. Почему так?)
