@@ -3,13 +3,71 @@
 var setupOpen = document.querySelector('.setup-open');
 var setup = document.querySelector('.setup');
 var setupClose = setup.querySelector('.setup-close');
+var setupSubmit = setup.querySelector('.setup-submit');
+var setupOpenIcon = setupOpen.querySelector('.setup-open-icon');
+
+var ENTER_KEY_CODE = 13;
+var ESCAPE_KEY_CODE = 27;
+
+var isActivateEvent = function (evt) {
+  return evt.keyCode && evt.keyCode === ENTER_KEY_CODE;
+};
+
+var showSetupElement = function () {
+  setup.classList.remove('invisible');
+  toggleAriaHidden(setup);
+
+  document.addEventListener('keydown', function (evt) {
+    if (evt.keyCode === ESCAPE_KEY_CODE) {
+      closeSetupElement();
+    }
+  });
+
+};
+
+var closeSetupElement = function () {
+  setup.classList.add('invisible');
+  toggleAriaHidden(setup);
+};
+
+var toggleAriaPressed = function (element) {
+  var pressed = (element.getAttribute('aria-pressed') === 'false');
+  element.setAttribute('aria-pressed', !pressed);
+};  // не понимаю как нужно обновлять этот атрибут в итоге. запуталась как он вообще должен работать и когда должно это значение меняться назад?
+
+var toggleAriaHidden = function (element) {
+  var hidden = (element.getAttribute('aria-hidden') === 'true');
+  element.setAttribute('aria-hidden', !hidden);
+};
 
 setupOpen.addEventListener('click', function () {
-  setup.classList.remove('invisible');
+  showSetupElement();
+});
+
+setupOpen.addEventListener('keydown', function (evt) {
+  if (isActivateEvent(evt)) {
+    showSetupElement();
+  }
 });
 
 setupClose.addEventListener('click', function () {
-  setup.classList.add('invisible');
+  closeSetupElement();
+});
+
+setupClose.addEventListener('keydown', function (evt) {
+  if (isActivateEvent(evt)) {
+    closeSetupElement();
+  }
+});
+
+setupSubmit.addEventListener('click', function () {
+  closeSetupElement();
+});
+
+setupSubmit.addEventListener('keydown', function (evt) {
+  if (isActivateEvent(evt)) {
+    closeSetupElement();
+  }
 });
 
 var nameField = document.querySelector('.setup-user-name');
