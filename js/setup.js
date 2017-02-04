@@ -4,7 +4,6 @@ var setupOpen = document.querySelector('.setup-open');
 var setup = document.querySelector('.setup');
 var setupClose = setup.querySelector('.setup-close');
 var setupSubmit = setup.querySelector('.setup-submit');
-var setupOpenIcon = setupOpen.querySelector('.setup-open-icon');
 
 var ENTER_KEY_CODE = 13;
 var ESCAPE_KEY_CODE = 27;
@@ -33,11 +32,14 @@ var closeSetupElement = function () {
 var toggleAriaPressed = function (element) {
   var pressed = (element.getAttribute('aria-pressed') === 'false');
   element.setAttribute('aria-pressed', !pressed);
-};  // не понимаю как нужно обновлять этот атрибут в итоге. запуталась как он вообще должен работать и когда должно это значение меняться назад?
+};  //  eslint выдает ошибку, потому что я  не использую нигде вот эту функцию? но проблема в том, чтоя  не понимаю как ее использовать, и в какие моменты должен переключаться атрибут aria-pressed туда-сюда. как быть?) в интернете почему-то совсем мало информации по этим темам. только общая в основном, из серии зачем да почему. или я туплю сильно:))
 
 var toggleAriaHidden = function (element) {
-  var hidden = (element.getAttribute('aria-hidden') === 'true');
-  element.setAttribute('aria-hidden', !hidden);
+  if (element.getAttribute('aria-hidden') === 'true') {
+    element.setAttribute('aria-hidden', false);
+  } else {
+    element.setAttribute('aria-hidden', true);
+  }
 };
 
 setupOpen.addEventListener('click', function () {
