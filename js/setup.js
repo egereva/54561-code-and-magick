@@ -12,27 +12,31 @@ var isActivateEvent = function (evt) {
   return evt.keyCode && evt.keyCode === ENTER_KEY_CODE;
 };
 
+var setupKeydownHandler = function (evt) {
+  if (evt.keyCode === ESCAPE_KEY_CODE) {
+    closeSetupElement();
+  }
+};
+
 var showSetupElement = function () {
   setup.classList.remove('invisible');
   toggleAriaHidden(setup);
 
-  document.addEventListener('keydown', function (evt) {
-    if (evt.keyCode === ESCAPE_KEY_CODE) {
-      closeSetupElement();
-    }
-  });
-
+  document.addEventListener('keydown', setupKeydownHandler);
 };
 
 var closeSetupElement = function () {
   setup.classList.add('invisible');
+
+  document.removeEventListener('keydown', setupKeydownHandler);
+
   toggleAriaHidden(setup);
 };
 
 var toggleAriaPressed = function (element) {
   var pressed = (element.getAttribute('aria-pressed') === 'false');
   element.setAttribute('aria-pressed', !pressed);
-};  //  eslint выдает ошибку, потому что я  не использую нигде вот эту функцию? но проблема в том, чтоя  не понимаю как ее использовать, и в какие моменты должен переключаться атрибут aria-pressed туда-сюда. как быть?) в интернете почему-то совсем мало информации по этим темам. только общая в основном, из серии зачем да почему. или я туплю сильно:))
+};
 
 var toggleAriaHidden = function (element) {
   if (element.getAttribute('aria-hidden') === 'true') {
