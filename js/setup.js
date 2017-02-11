@@ -3,13 +3,77 @@
 var setupOpen = document.querySelector('.setup-open');
 var setup = document.querySelector('.setup');
 var setupClose = setup.querySelector('.setup-close');
+var setupSubmit = setup.querySelector('.setup-submit');
+
+var ENTER_KEY_CODE = 13;
+var ESCAPE_KEY_CODE = 27;
+
+var isActivateEvent = function (evt) {
+  return evt.keyCode && evt.keyCode === ENTER_KEY_CODE;
+};
+
+var setupKeydownHandler = function (evt) {
+  if (evt.keyCode === ESCAPE_KEY_CODE) {
+    closeSetupElement();
+  }
+};
+
+var showSetupElement = function () {
+  setup.classList.remove('invisible');
+  toggleAriaHidden(setup);
+
+  document.addEventListener('keydown', setupKeydownHandler);
+};
+
+var closeSetupElement = function () {
+  setup.classList.add('invisible');
+
+  document.removeEventListener('keydown', setupKeydownHandler);
+
+  toggleAriaHidden(setup);
+};
+
+/* var toggleAriaPressed = function (element) {
+  var pressed = (element.getAttribute('aria-pressed') === 'false');
+  element.setAttribute('aria-pressed', !pressed);
+}; т.к. ошибка возникала из-за того, что эта функция нигде не используется, я ее закомментировала.*/
+
+var toggleAriaHidden = function (element) {
+  if (element.getAttribute('aria-hidden') === 'true') {
+    element.setAttribute('aria-hidden', false);
+  } else {
+    element.setAttribute('aria-hidden', true);
+  }
+};
 
 setupOpen.addEventListener('click', function () {
-  setup.classList.remove('invisible');
+  showSetupElement();
+});
+
+setupOpen.addEventListener('keydown', function (evt) {
+  if (isActivateEvent(evt)) {
+    showSetupElement();
+  }
 });
 
 setupClose.addEventListener('click', function () {
-  setup.classList.add('invisible');
+  closeSetupElement();
+});
+
+setupClose.addEventListener('keydown', function (evt) {
+  if (isActivateEvent(evt)) {
+    closeSetupElement();
+  }
+});
+
+setupSubmit.addEventListener('click', function () {
+  closeSetupElement();
+});
+
+setupSubmit.addEventListener('keydown', function (evt) {
+  if (isActivateEvent(evt)) {
+    closeSetupElement();
+  }
 });
 
 var nameField = document.querySelector('.setup-user-name');
