@@ -33,10 +33,10 @@ var closeSetupElement = function () {
   toggleAriaHidden(setup);
 };
 
-var toggleAriaPressed = function (element) {
+/* var toggleAriaPressed = function (element) {
   var pressed = (element.getAttribute('aria-pressed') === 'false');
   element.setAttribute('aria-pressed', !pressed);
-};
+}; т.к. ошибка возникала из-за того, что эта функция нигде не используется, я ее закомментировала.*/
 
 var toggleAriaHidden = function (element) {
   if (element.getAttribute('aria-hidden') === 'true') {
